@@ -1,0 +1,41 @@
+name: CI/CD with Docker Hub
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on the "main" branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Build and Run Tests
+        run: |
+          # Replace these commands with your specific build and test commands
+          pip install -r requirements.txt
+          python run_tests.py
+
+      - name: Check for run.py changes
+        id: runpy-changes
+        run: |
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "run.py" || true)
+          echo "::set-output name=changed::$CHANGED_FILES"
+
+      - name: Docker Login with Access Token
+        if: steps.runpy-changes.outputs.changed != ''
+        env:
+          DOCKERHUB_ACCESS_TOKEN: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+        run: |
+          echo $DOCKERHUB_ACCESS_TOKEN | docker login --username andyanaj --password-stdin
+
+      - name: Build and Push Docker Image
+        if: steps.runpy-changes.outputs.changed != ''
+        run: |
+          
+          docker build -t andyanaj/todo:${{ github.run_id }} .
+          docker push andyanaj/todo:${{ github.run_id }}
+          sed -i "s|image: andyanaj/todo:.*|image: andyanaj/todo:${{ github.run_id }}|" ./k8/app-dep.yml
