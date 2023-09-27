@@ -38,4 +38,4 @@ jobs:
           
           docker build -t andyanaj/todo:${{ github.run_id }} .
           docker push andyanaj/todo:${{ github.run_id }}
-          sed -i "s|image: andyanaj/todo:.*|image: andyanaj/todo:${{ github.run_id }}|" ./k8/app-dep.yml
+          sed -i "s|image: andyanaj/todo.*|image: andyanaj/todo:${{ github.run_id }}|" ./k8/app-dep.yml
