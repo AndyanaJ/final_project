@@ -47,7 +47,7 @@ jobs:
             push-branch: 'main'
             commit-message: 'publish'
             force-add: 'true'
-            files: k8/app-dep.yaml
+            files: k8/app-dep.yml
             name: Andy
             email: my.github@email.com
 
