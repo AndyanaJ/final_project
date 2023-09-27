@@ -33,7 +33,7 @@ jobs:
           echo $DOCKERHUB_ACCESS_TOKEN | docker login --username andyanaj --password-stdin
 
       - name: Build and Push Docker Image
-        if: steps.runpy-changes.outputs.changed != ''
+       #if: steps.runpy-changes.outputs.changed != ''
         run: |
           
           docker build -t andyanaj/todo:${{ github.run_id }} .
