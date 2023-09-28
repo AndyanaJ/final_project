@@ -43,7 +43,7 @@ jobs:
       - name: push to github
         uses: github-actions-x/commit@v2.9
         with:
-            github-token: ${{ secrets.GH_TOKE }}
+            github-token: ${{ secrets.GH_TOKEN }}
             push-branch: 'main'
             commit-message: 'publish'
             force-add: 'true'
