@@ -22,7 +22,7 @@ jobs:
       - name: Check for run.py changes
         id: runpy-changes
         run: |
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "run.py" || true)
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "k8/run.py" || true)
           echo "::set-output name=changed::$CHANGED_FILES"
 
       - name: Docker Login with Access Token
