@@ -1,13 +1,13 @@
 import unittest
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from run import Todo, create_app
+from run import app, Todo  # Import the Flask app instance directly from run.py
 
 class FlaskAppTestCase(unittest.TestCase):
     
     def setUp(self):
         # Create a test Flask app
-        self.app = create_app("test")
+        self.app = app
         self.app.config['TESTING'] = True
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'  # Use an in-memory SQLite database for testing
         self.client = self.app.test_client()
