@@ -22,8 +22,19 @@ jobs:
       - name: Check for run.py changes
         id: runpy-changes
         run: |
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "llarun.py" || true)
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "src/run.py" || true)
           echo "::set-output name=changed::$CHANGED_FILES"
+
+      # - name: Check for run.py changes
+      #   id: runpy-changes
+      #   run: |
+      #     CHANGED_FILES=$(git diff --name-only ${{ github.event.before.sha }} ${{ github.sha }} | grep "src/run.py" || true)
+      #     if [ -n "$CHANGED_FILES" ]; then
+      #     echo "Changes detected in src/run.py"
+      #     else
+      #     echo "No changes in src/run.py"
+      #     fi
+      #     echo "::set-output name=changed::$CHANGED_FILES"
 
       - name: Docker Login with Access Token
         if: steps.runpy-changes.outputs.changed != ''
