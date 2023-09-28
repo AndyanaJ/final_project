@@ -17,12 +17,4 @@ spec:
         image: andyanaj/todo:6337167132
         ports:
         - containerPort: 5000 
-       # env:
-       # - name: DB_USER
-       #   value: root
-       # - name: DB_PASSWORD
-       #   value: root
-       # - name: DB_HOST
-       #  value: mysql
-       # - name: DB_NAME
-       #   value: flask
+       
