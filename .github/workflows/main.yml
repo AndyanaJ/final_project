@@ -38,7 +38,7 @@ jobs:
           
           docker build -t andyanaj/todo:${{ github.run_id }} .
           docker push andyanaj/todo:${{ github.run_id }}
-          sed -i "s|image: andyanaj/todo.*|image: andyanaj/todo:${{ github.run_id }}|" ./k8/app-dep.yml
+          sed -i "s|image: andyanaj/todo:.*|image: andyanaj/todo:${{ github.run_id }}|" ./k8/app-dep.yml
 
       - name: push to github
         uses: github-actions-x/commit@v2.9
@@ -47,7 +47,7 @@ jobs:
             push-branch: 'main'
             commit-message: 'publish'
             force-add: 'true'
-            files: app-dep.yml
+            files: k8/app-dep.yml
             name: Andy
             email: my.github@email.com
 
