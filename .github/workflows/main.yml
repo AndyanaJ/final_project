@@ -13,11 +13,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Build and Run Tests
-        run: |
-          # Replace these commands with your specific build and test commands
-          pip install -r requirements.txt
-          # python test_app.py
+      #need a working test_app.py that write to the database
+      # - name: Build and Run Tests
+      #   run: |
+      #     pip install -r requirements.txt
+      #     python test_app.py
 
       - name: Check for run.py changes
         id: runpy-changes
@@ -26,14 +26,14 @@ jobs:
           echo "::set-output name=changed::$CHANGED_FILES"
 
       - name: Docker Login with Access Token
-        # if: steps.runpy-changes.outputs.changed != ''
+        if: steps.runpy-changes.outputs.changed != ''
         env:
           DOCKERHUB_ACCESS_TOKEN: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
         run: |
           echo $DOCKERHUB_ACCESS_TOKEN | docker login --username andyanaj --password-stdin
 
       - name: Build and Push Docker Image
-       #if: steps.runpy-changes.outputs.changed != ''
+        if: steps.runpy-changes.outputs.changed != ''
         run: |
           
           docker build -t andyanaj/todo:${{ github.run_id }} src/
