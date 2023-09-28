@@ -26,14 +26,14 @@ jobs:
       #    echo "::set-output name=changed::$CHANGED_FILES"
 
       - name: Docker Login with Access Token
-        if: steps.runpy-changes.outputs.changed != ''
+        #if: steps.runpy-changes.outputs.changed != ''
         env:
           DOCKERHUB_ACCESS_TOKEN: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
         run: |
           echo $DOCKERHUB_ACCESS_TOKEN | docker login --username andyanaj --password-stdin
 
       - name: Build and Push Docker Image
-        if: steps.runpy-changes.outputs.changed != ''
+        #if: steps.runpy-changes.outputs.changed != ''
         run: |
           
           docker build -t andyanaj/todo:${{ github.run_id }} src/
