@@ -5,13 +5,13 @@ from run import app, Todo  # Import the Flask app instance directly from run.py
 
 class FlaskAppTestCase(unittest.TestCase):
     
+    @classmethod
+    def setUpClass(cls):
+        # Create a single SQLAlchemy instance and share it across all tests
+        cls.db = SQLAlchemy(app)
+
     def setUp(self):
-        # Create a test Flask app
-        self.app = app
-        self.app.config['TESTING'] = True
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'  # Use an in-memory SQLite database for testing
-        self.client = self.app.test_client()
-        self.db = SQLAlchemy(self.app)
+        self.client = app.test_client()
         self.db.create_all()
 
     def tearDown(self):
