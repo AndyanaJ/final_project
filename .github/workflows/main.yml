@@ -36,7 +36,7 @@ jobs:
        #if: steps.runpy-changes.outputs.changed != ''
         run: |
           
-          docker build -t andyanaj/todo:${{ github.run_id }} .
+          docker build -t andyanaj/todo:${{ github.run_id }} src/
           docker push andyanaj/todo:${{ github.run_id }}
           sed -i "s|image: andyanaj/todo:.*|image: andyanaj/todo:${{ github.run_id }}|" ./k8/app-dep.yml
 
