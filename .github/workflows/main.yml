@@ -13,6 +13,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      - name: Upgrade Flask
+        run: |
+          pip install Flask --upgrade    
+
       #need a working test_app.py that write to the database
       - name: Build and Run Tests
         run: |
