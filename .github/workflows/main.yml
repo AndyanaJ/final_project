@@ -48,6 +48,6 @@ jobs:
             commit-message: 'publish'
             force-add: 'true'
             files: k8/app-dep.yml
-            name: Andyana
+            name: Andy
             email: my.github@email.com
 
