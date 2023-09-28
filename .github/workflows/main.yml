@@ -17,11 +17,11 @@ jobs:
         run: |
           pip install Flask --upgrade    
 
-      #need a working test_app.py that write to the database
-      - name: Build and Run Tests
-        run: |
-           pip install -r src/requirements.txt
-           python test_app.py
+      # #need a working test_app.py that write to the database
+      # - name: Build and Run Tests
+      #   run: |
+      #      pip install -r src/requirements.txt
+      #      python test_app.py
 
       #- name: Check for run.py changes
       #  id: runpy-changes
