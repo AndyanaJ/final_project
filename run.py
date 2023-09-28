@@ -14,7 +14,7 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     complete = db.Column(db.Boolean)
-@app.before_first_request
+@app.before_request #im changing @app.before_first_request 
 def create_tables():
     db.create_all()
 
