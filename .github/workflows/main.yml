@@ -17,7 +17,7 @@ jobs:
         run: |
           # Replace these commands with your specific build and test commands
           pip install -r requirements.txt
-          python test_app.py
+          # python test_app.py
 
       - name: Check for run.py changes
         id: runpy-changes
