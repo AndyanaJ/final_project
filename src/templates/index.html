@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{%block head%}{%endblock%}
+
+{%block body%}
+<h1>Welcome to our app!</h1>
+<div class="box">
+    <form action="/add" method="post">
+        <label for="title">Todo title</label>
+        <input type="text" name="title" placeholder="What needs to be done?" required>
+        <button type="submit">Add</button>
+    </form>
+    {% for todo in list_todo %}
+        <p>{{ todo.id }} | {{ todo.title }}</p>
+        <a href="/update/{{ todo.id }}">Update</a>
+        <a href="/delete/{{ todo.id }}">Delete</a>
+        {% if todo.complete %}
+            <span>Complete</span>
+        {% else %}
+            <span>Not complete</span>
+        {% endif %}
+    {% endfor %}
+</div>
+{%endblock%}
