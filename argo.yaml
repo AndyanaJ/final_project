@@ -1,13 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
+  name: argo
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/AndyanaJ/final_project.git
-    path: k8/
-    targetRevision: HEAD
   destination:
+    name: ''
+    namespace: argocd
     server: https://kubernetes.default.svc
-    namespace: default
+  source:
+    path: k8/
+    repoURL: https://github.com/AndyanaJ/final_project.git
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - ApplyOutOfSyncOnly=true
