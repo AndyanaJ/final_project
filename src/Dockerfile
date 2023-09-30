@@ -3,6 +3,10 @@ RUN python -m pip install --upgrade pip
 WORKDIR /app
 COPY . /app
 RUN pip install PyMySQL
+RUN pip install prometheus_flask_exporter
 RUN pip install -r requirements.txt
 RUN pip install --upgrade 'SQLAlchemy<1.4'
 CMD ["python", "run.py"]
+
+#RUN pip install prometheus_flask_exporter added from gpt
+

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy 
 import os
+from prometheus_flask_exporter import PrometheusMetrics # added from gpt
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{}:{}@mysql-service:3306/{}'.format(
     os.getenv('DB_USER', 'root'),
@@ -46,4 +47,9 @@ def delete(todo_id):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
+    
+    # Expose /metrics endpoint (gpt)
+@app.route('/metrics')
+def metrics():
+    return metrics.export()
 
