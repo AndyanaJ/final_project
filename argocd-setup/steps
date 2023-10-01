@@ -1,0 +1,6 @@
+kubectl get secrets argocd-initial-admin-secret -o yaml -n argocd
+
+echo <enter secret password> | base64 -D
+
+this will generate the password                  
+
