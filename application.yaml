@@ -1,0 +1,14 @@
+project: default
+source:
+  repoURL: 'https://github.com/AndyanaJ/final_project.git'
+  path: k8
+  targetRevision: HEAD
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: appnamespace
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - CreateNamespace=true
