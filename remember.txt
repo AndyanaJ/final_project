@@ -1,0 +1,17 @@
+argo run:
+kubectl port-forward svc/argocd-server -n a
+rgocd 8081:443
+
+admin
+pass: argocd admin initial-password -n argocd username: admin
+
+grafana:
+kubectl port-forward svc/kube-prometheus-stackr-grafana 9091:80 -n monitoring
+
+user: admin
+pass: prom-operator
+
+kubectl port-forward svc/flask-app-service 
+-n appnamespace 5000:80
+
+aws eks update-kubeconfig --region us-east-1 --name demo
